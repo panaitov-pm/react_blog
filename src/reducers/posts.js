@@ -2,7 +2,8 @@ import C from '../constants';
 
 const defaultState = {
 	posts    : [],
-	isLoading: false
+	isLoading: false,
+	currentPost: {}
 };
 
 export default (state = defaultState, action) => {

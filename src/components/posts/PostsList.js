@@ -21,7 +21,7 @@ class PostsList extends Component {
 					{
 						posts.map(post => (
 							<Post key={post.id}
-								post={post}/>
+								post={post} />
 						))
 					}
 				</List>
