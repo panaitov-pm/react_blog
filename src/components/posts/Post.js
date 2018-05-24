@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import {List} from 'semantic-ui-react';
 
-const Post = () => {
+const Post = ({post}) => {
+	const {title, body} = post;
 	return (
-		<div>
-			<h1>Post</h1>
-		</div>
+		<Fragment>
+			<List.Item>
+				<List.Content>
+					<List.Header as='a'>{title}</List.Header>
+					{body}
+				</List.Content>
+			</List.Item>
+		</Fragment>
 	);
 };
 

@@ -1,7 +1,7 @@
 import C from '../constants';
 
 const defaultState = {
-	posts: [],
+	id: '',
 	isLoading: false,
 };
 
