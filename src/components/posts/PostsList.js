@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {List} from 'semantic-ui-react';
+import Spinner from 'react-spinkit';
 import {getPosts} from '../../AC';
 
-import Post from './Post';
+import PostItem from './PostItem';
 
 class PostsList extends Component {
 
@@ -15,26 +16,31 @@ class PostsList extends Component {
 
 	render() {
 		const {posts, isLoading} = this.props;
+		{if(isLoading) { return <Spinner name="folding-cube" color="coral" />}}
 		return (
-			<div>
+			<Fragment>
 				<List celled>
 					{
 						posts.map(post => (
-							<Post key={post.id}
+							<PostItem key={post.id}
 								post={post} />
 						))
 					}
 				</List>
-			</div>
+			</Fragment>
 		);
 	}
 }
 
-PostsList.propTypes = {};
+PostsList.propTypes = {
+	getPosts: PropTypes.func.isRequired,
+	posts: PropTypes.array,
+	isLoading: PropTypes.bool.isRequired,
+};
 
 export default connect(
 	({posts}) => ({
-		posts: posts.posts,
+		posts: posts.data,
 		isLoading: posts.isLoading
 	}),
 	{getPosts}

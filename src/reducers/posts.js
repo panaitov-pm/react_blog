@@ -1,7 +1,7 @@
 import C from '../constants';
 
 const defaultState = {
-	posts    : [],
+	data    : [],
 	isLoading: false,
 	currentPost: {}
 };
@@ -13,7 +13,7 @@ export default (state = defaultState, action) => {
 		case C.GET_POSTS + C.START_LOAD:
 			return {...state, isLoading: true};
 		case C.GET_POSTS + C.FINISH_LOAD:
-			return {...state, posts: [...posts], isLoading: false};
+			return {...state, data: [...posts], isLoading: false};
 		default:
 			return state;
 	}
