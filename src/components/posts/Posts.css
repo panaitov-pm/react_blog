@@ -1,0 +1,12 @@
+.list-group__count {
+	margin-left :auto;
+}
+
+.list-group__title {
+	text-transform: capitalize;
+}
+
+.list-group-item {
+	display :flex;
+	align-items :flex-start;
+}

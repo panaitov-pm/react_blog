@@ -10,7 +10,7 @@ class Post extends Component {
 
 	handleGetPostById = () => {
 		const {match, posts} = this.props;
-		let post = posts.filter(item => item.id === parseInt(match.params.id));
+		let post = posts.filter(item => item.id === parseInt((match.params.id), 10));
 		post = arrayToObject(post);
 		this.setState({post: {...post[match.params.id]}});
 	};

@@ -9,6 +9,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 
 const store = configureStore();
+window.store = store;
 
 ReactDOM.render(
 	<BrowserRouter>

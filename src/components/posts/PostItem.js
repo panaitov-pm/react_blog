@@ -1,28 +1,26 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-import {List} from 'semantic-ui-react';
-
-const PostItem = ({post}) => {
+const PostItem = ( { post, comments, author } ) => {
 	return (
-		<Fragment>
-			<List.Item>
-				<List.Content>
-					<List.Header>
-						<NavLink to={`/post/${post.id}`}>{post.title}</NavLink>
-					</List.Header>
-					{post.body}
-				</List.Content>
-			</List.Item>
-		</Fragment>
+		<li className="list-group-item">
+			<div className="list-group__content">
+				<h3 className="list-group__title"><NavLink to={`/post/${post.id}`}>{post.title}</NavLink></h3>
+				<p>{post.body}</p>
+				<div clasname="list-group__meta"><small><em><strong>Author:</strong> {author.name}</em></small></div>
+			</div>
+			<div className="list-group__count">
+				<span className="badge badge-primary badge-pill">{comments}</span>
+			</div>
+		</li>
 	);
 };
 
 PostItem.propTypes = {
-    post: PropTypes.object.isRequired,
+	post: PropTypes.object.isRequired,
+	comments: PropTypes.number,
 };
-
 
 
 export default PostItem;

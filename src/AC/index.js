@@ -12,6 +12,44 @@ export const getPosts = () => dispatch => {
 			posts: data
 		})
 	})
+	.then(() => {
+		dispatch({
+			type: C.GET_COMMENTS + C.START_LOAD
+		});
+		fetch('http://jsonplaceholder.typicode.com/comments/')
+		.then(response => response.json())
+		.then(comments => {
+			dispatch({
+				type : C.GET_COMMENTS + C.FINISH_LOAD,
+				comments
+			})
+		})
+		.catch(error => {
+			dispatch({
+				type  : C.GET_ERRORS,
+				errors: error
+			})
+		})
+	})
+	.then(() => {
+		dispatch({
+			type: C.GET_USERS + C.START_LOAD
+		});
+		fetch('http://jsonplaceholder.typicode.com/users/')
+		.then(response => response.json())
+		.then(users => {
+			dispatch({
+				type : C.GET_USERS + C.FINISH_LOAD,
+				users
+			})
+		})
+		.catch(error => {
+			dispatch({
+				type  : C.GET_ERRORS,
+				errors: error
+			})
+		})
+	})
 	.catch(error => {
 		dispatch({
 			type  : C.GET_ERRORS,
@@ -20,12 +58,3 @@ export const getPosts = () => dispatch => {
 	})
 };
 
-export const getPost = (post) => dispatch => {
-	dispatch({
-		type: C.GET_CURRENT_POST + C.START_LOAD
-	});
-	dispatch({
-		type: C.GET_CURRENT_POST + C.FINISH_LOAD,
-		post
-	});
-};
