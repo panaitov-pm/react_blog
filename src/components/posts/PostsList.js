@@ -15,7 +15,7 @@ class PostsList extends Component {
 	}
 
 	render() {
-		const { posts, isLoading, comments, users } = this.props;
+		const { posts, isLoading, comments, users, filteredPost } = this.props;
 
 		if ( isLoading ) {
 			return <Spinner name="folding-cube" color="coral" />
@@ -23,7 +23,13 @@ class PostsList extends Component {
 		return (
 			<ul className="list-group">
 				{
-					posts.map( post => {
+					posts.filter(item => {
+						if(item.title.toLowerCase().includes(filteredPost.trim().toLowerCase())) {
+							return item.title.toLowerCase().includes(filteredPost.trim().toLowerCase());
+						} else {
+							return item.body.toLowerCase().includes(filteredPost.trim().toLowerCase());
+						}
+					}).map( post => {
 						return (
 							<PostItem key={post.id}
 							          post={post}
@@ -42,7 +48,8 @@ PostsList.propTypes = {
 	posts    : PropTypes.array,
 	comments : PropTypes.object,
 	users    : PropTypes.object,
-	isLoading: PropTypes.bool.isRequired
+	isLoading: PropTypes.bool.isRequired,
+	filteredPost: PropTypes.string.isRequired,
 };
 
 export default connect(
