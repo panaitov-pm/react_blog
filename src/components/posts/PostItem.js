@@ -1,26 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {NavLink} from 'react-router-dom';
+import {setPostView} from '../../AC';
 
-const PostItem = ( { post, comments, author } ) => {
+import './Posts.css';
+
+const PostItem = ({post, author, setPostView}) => {
 	return (
 		<li className="list-group-item">
 			<div className="list-group__content">
-				<h3 className="list-group__title"><NavLink to={`/post/${post.id}`}>{post.title}</NavLink></h3>
+				<h3 className="list-group__title" onClick={() => setPostView(post.id)}>
+					<NavLink to={`/post/${post.id}`}>{post.title}</NavLink></h3>
 				<p>{post.body}</p>
-				<div clasname="list-group__meta"><small><em><strong>Author:</strong> {author.name}</em></small></div>
-			</div>
-			<div className="list-group__count">
-				<span className="badge badge-primary badge-pill">{comments}</span>
+				<div className="list-group__meta">
+					<small>
+						<em>
+							<strong>Author:</strong> {author.name}
+						</em>
+					</small>
+					<small>Views: {post.postViews}</small>
+				</div>
 			</div>
 		</li>
 	);
 };
 
 PostItem.propTypes = {
-	post: PropTypes.object.isRequired,
-	comments: PropTypes.number,
+  author: PropTypes.string,
+  post: PropTypes.object.isRequired,
+  setPostView: PropTypes.func
 };
 
-
-export default PostItem;
+export default connect(
+	null,
+	{setPostView}
+)(PostItem);

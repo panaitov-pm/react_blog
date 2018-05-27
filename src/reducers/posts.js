@@ -3,22 +3,25 @@ import C from '../constants';
 const defaultState = {
 	data       : [],
 	comments   : [],
-	users   : [],
-	isLoading  : false,
+	users      : [],
+	currentPost: {},
+	isLoading  : false
 };
 
-export default ( state = defaultState, action ) => {
-	const { type, posts, comments, users } = action;
+export default (state = defaultState, action) => {
+	const {type, posts, comments, users, currentPost} = action;
 
-	switch ( type ) {
+	switch (type) {
 		case C.GET_POSTS + C.START_LOAD:
-			return { ...state, isLoading: true };
+			return {...state, isLoading: true};
 		case C.GET_POSTS + C.FINISH_LOAD:
-			return { ...state, data: [...posts] };
+			return {...state, data: [...posts]};
+		case C.GET_POST + C.FINISH_LOAD:
+			return {...state, currentPost: {...currentPost}};
 		case C.GET_COMMENTS + C.FINISH_LOAD:
-			return { ...state, comments: [...comments]};
+			return {...state, comments: [...comments]};
 		case C.GET_USERS + C.FINISH_LOAD:
-			return { ...state, users: [...users], isLoading: false };
+			return {...state, users: [...users], isLoading: false};
 		default:
 			return state;
 	}

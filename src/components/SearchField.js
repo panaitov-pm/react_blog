@@ -16,9 +16,10 @@ class SearchField extends Component {
 			<div className="search-form">
 				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
+						<label htmlFor="search">Search</label>
 						<input type="text" className="form-control"
 						       aria-describedby="searchHelp" id="search"
-						       placeholder="Search..." value={this.props.filteredPost}
+						       value={this.props.filteredPost}
 						       onChange={this.handleSearchPost} />
 					</div>
 				</form>

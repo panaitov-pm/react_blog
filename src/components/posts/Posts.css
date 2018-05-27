@@ -6,7 +6,43 @@
 	text-transform: capitalize;
 }
 
-.list-group-item {
+.list-group__meta {
 	display :flex;
+	align-items :center;
+	justify-content :space-between;
+}
+.posts-header {
+	display :flex;
+	flex-wrap:wrap;
+	margin-bottom :30px;
+	align-items :center;
+}
+
+.posts-header__item {
+	width : calc(50% - 15px);
+}
+
+.posts-header__item:not(:first-of-type) {
+	margin-left :30px;
+}
+
+.form-group {
+	margin-bottom :0;
+}
+
+.list-group-item__title {
+	display :flex;
+	flex-wrap:wrap;
+	justify-content :space-between;
 	align-items :flex-start;
+}
+
+.list-group-item__title small {
+	font-size :12px;
+	transform :translateY(7px);
+	
+}
+
+.list-group-item__title span {
+	width :60%;
 }

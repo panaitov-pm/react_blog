@@ -20,7 +20,7 @@ export const getPosts = () => dispatch => {
 		.then(response => response.json())
 		.then(comments => {
 			dispatch({
-				type : C.GET_COMMENTS + C.FINISH_LOAD,
+				type: C.GET_COMMENTS + C.FINISH_LOAD,
 				comments
 			})
 		})
@@ -39,7 +39,7 @@ export const getPosts = () => dispatch => {
 		.then(response => response.json())
 		.then(users => {
 			dispatch({
-				type : C.GET_USERS + C.FINISH_LOAD,
+				type: C.GET_USERS + C.FINISH_LOAD,
 				users
 			})
 		})
@@ -58,3 +58,40 @@ export const getPosts = () => dispatch => {
 	})
 };
 
+export const getPost = (id) => dispatch => {
+	fetch(`http://jsonplaceholder.typicode.com/posts/${id}`)
+	.then(response => response.json())
+	.then(data => {
+		dispatch({
+			type : C.GET_POST + C.FINISH_LOAD,
+			currentPost: data
+		})
+	})
+	.then(() => {
+		fetch(`http://jsonplaceholder.typicode.com/comments?postid=${id}`)
+		.then(response => response.json())
+		.then(comments => {
+			dispatch({
+				type: C.GET_COMMENTS + C.FINISH_LOAD,
+				comments
+			})
+		})
+		.catch(error => {
+			dispatch({
+				type  : C.GET_ERRORS,
+				errors: error
+			})
+		})
+	})
+	.catch(error => {
+		dispatch({
+			type  : C.GET_ERRORS,
+			errors: error
+		})
+	})
+};
+
+export const setPostView = (id) => ({
+	type: C.SET_POST_VIEW,
+	id
+});

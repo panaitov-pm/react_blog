@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Spinner from 'react-spinkit';
-import { getPosts } from '../../AC';
+import {getPosts} from '../../AC';
 
 import PostItem from './PostItem';
 import './Posts.css';
@@ -10,33 +10,44 @@ import './Posts.css';
 class PostsList extends Component {
 
 	componentDidMount() {
-		const { getPosts } = this.props;
+		const {getPosts} = this.props;
 		getPosts();
 	}
 
 	render() {
-		const { posts, isLoading, comments, users, filteredPost } = this.props;
+		const {posts, isLoading, users, filteredPost, postViews, viewsSorting} = this.props;
+		let postsWithViews = [];
 
-		if ( isLoading ) {
+		if (isLoading) {
 			return <Spinner name="folding-cube" color="coral" />
 		}
+
+		postsWithViews = posts.map(post => {
+			return {...post, postViews: (postViews[post.id] || 0), date: new Date()};
+		});
+
+		if (filteredPost.length > 0) {
+			postsWithViews = postsWithViews.filter(item => {
+				if (item.title.toLowerCase().includes(filteredPost.trim().toLowerCase())) {
+					return item.title.toLowerCase().includes(filteredPost.trim().toLowerCase());
+				} else {
+					return item.body.toLowerCase().includes(filteredPost.trim().toLowerCase());
+				}
+			});
+		}
+		(viewsSorting === 'views_desc')
+			? postsWithViews = postsWithViews.sort((a, b) => b.postViews - a.postViews)
+			: postsWithViews = postsWithViews.sort((a, b) => a.postViews - b.postViews);
 		return (
 			<ul className="list-group">
 				{
-					posts.filter(item => {
-						if(item.title.toLowerCase().includes(filteredPost.trim().toLowerCase())) {
-							return item.title.toLowerCase().includes(filteredPost.trim().toLowerCase());
-						} else {
-							return item.body.toLowerCase().includes(filteredPost.trim().toLowerCase());
-						}
-					}).map( post => {
+					postsWithViews.map(post => {
 						return (
 							<PostItem key={post.id}
 							          post={post}
-							          comments={comments[post.id]}
-							author={users[post.userId]}/>
+							          author={users[post.userId]} />
 						)
-					} )
+					})
 				}
 			</ul>
 		);
@@ -44,27 +55,25 @@ class PostsList extends Component {
 }
 
 PostsList.propTypes = {
-	getPosts : PropTypes.func.isRequired,
-	posts    : PropTypes.array,
-	comments : PropTypes.object,
-	users    : PropTypes.object,
-	isLoading: PropTypes.bool.isRequired,
+	getPosts    : PropTypes.func.isRequired,
+	posts       : PropTypes.array,
+	postViews   : PropTypes.object,
+	users       : PropTypes.object,
+	isLoading   : PropTypes.bool.isRequired,
 	filteredPost: PropTypes.string.isRequired,
+	viewsSorting: PropTypes.string.isRequired,
 };
 
 export default connect(
-	( { posts } ) => ({
+	({posts, postViews}) => ({
 		posts    : posts.data,
 		isLoading: posts.isLoading,
-		comments : posts.comments.reduce( ( acc, item ) => {
-			acc[item.postId] = (acc[item.postId] || 0) + 1;
-			return acc;
-		}, {} ),
-		users    : posts.users.reduce( ( acc, item ) => {
+		users    : posts.users.reduce((acc, item) => {
 			acc[item.id] = item;
 			return acc;
-		}, {} )
+		}, {}),
+		postViews
 
 	}),
-	{ getPosts }
-)( PostsList );
+	{getPosts}
+)(PostsList);
