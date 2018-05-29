@@ -1,6 +1,6 @@
 {
-  "homepage": "http://panaitov-pm.github.io/react-blog/",
-  "name": "react-blog",
+  "homepage": "http://panaitov-pm.github.io/react_blog/",
+  "name": "react_blog",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
