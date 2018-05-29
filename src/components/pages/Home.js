@@ -1,4 +1,5 @@
 import React, {Fragment, Component} from 'react';
+
 import ErrorBoundary from '../../ErrorBoundary';
 import PostsList from '../posts/PostsList';
 import SearchField from '../SearchField';

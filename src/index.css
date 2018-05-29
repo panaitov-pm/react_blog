@@ -3,12 +3,3 @@ body {
 	padding-top :30px;
 	font-family :sans-serif;
 }
-
-.sk-folding-cube {
-	width :80px;
-	height :80px;
-	position :absolute;
-	top :50%;
-	left :50%;
-	transform :translate(-50%, -50%) rotateZ(45deg);
-}

@@ -19,9 +19,9 @@ export default (state = defaultState, action) => {
 		case C.GET_POST + C.FINISH_LOAD:
 			return {...state, currentPost: {...currentPost}};
 		case C.GET_COMMENTS + C.FINISH_LOAD:
-			return {...state, comments: [...comments]};
+			return {...state, comments: [...comments], isLoading: false};
 		case C.GET_USERS + C.FINISH_LOAD:
-			return {...state, users: [...users], isLoading: false};
+			return {...state, users: [...users]};
 		default:
 			return state;
 	}

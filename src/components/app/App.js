@@ -1,9 +1,10 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
+import Async from 'react-code-splitting'
 
-import Home from '../pages/Home';
-import Post from '../pages/Post';
-import Page404 from '../pages/Page404';
+const Home = () => <Async load={import('../pages/Home')}/>;
+const Post = (props) => <Async load={import('../pages/Post')} componentProps={props}/>;
+const Page404 = () => <Async load={import('../pages/Page404')}/>;
 
 const App = () => {
 	return (

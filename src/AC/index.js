@@ -14,14 +14,14 @@ export const getPosts = () => dispatch => {
 	})
 	.then(() => {
 		dispatch({
-			type: C.GET_COMMENTS + C.START_LOAD
+			type: C.GET_USERS + C.START_LOAD
 		});
-		fetch('http://jsonplaceholder.typicode.com/comments/')
+		fetch('http://jsonplaceholder.typicode.com/users/')
 		.then(response => response.json())
-		.then(comments => {
+		.then(users => {
 			dispatch({
-				type: C.GET_COMMENTS + C.FINISH_LOAD,
-				comments
+				type: C.GET_USERS + C.FINISH_LOAD,
+				users
 			})
 		})
 		.catch(error => {
@@ -33,14 +33,14 @@ export const getPosts = () => dispatch => {
 	})
 	.then(() => {
 		dispatch({
-			type: C.GET_USERS + C.START_LOAD
+			type: C.GET_COMMENTS + C.START_LOAD
 		});
-		fetch('http://jsonplaceholder.typicode.com/users/')
+		fetch('http://jsonplaceholder.typicode.com/comments/')
 		.then(response => response.json())
-		.then(users => {
+		.then(comments => {
 			dispatch({
-				type: C.GET_USERS + C.FINISH_LOAD,
-				users
+				type: C.GET_COMMENTS + C.FINISH_LOAD,
+				comments
 			})
 		})
 		.catch(error => {

@@ -27,7 +27,7 @@ const PostItem = ({post, author, setPostView}) => {
 };
 
 PostItem.propTypes = {
-  author: PropTypes.string,
+  author: PropTypes.object,
   post: PropTypes.object.isRequired,
   setPostView: PropTypes.func
 };
