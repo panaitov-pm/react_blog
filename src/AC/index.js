@@ -4,7 +4,7 @@ export const getPosts = () => dispatch => {
 	dispatch({
 		type: C.GET_POSTS + C.START_LOAD
 	});
-	fetch('http://jsonplaceholder.typicode.com/posts/')
+	fetch('https://jsonplaceholder.typicode.com/posts/')
 	.then(response => response.json())
 	.then(data => {
 		dispatch({
@@ -16,7 +16,7 @@ export const getPosts = () => dispatch => {
 		dispatch({
 			type: C.GET_USERS + C.START_LOAD
 		});
-		fetch('http://jsonplaceholder.typicode.com/users/')
+		fetch('https://jsonplaceholder.typicode.com/users/')
 		.then(response => response.json())
 		.then(users => {
 			dispatch({
@@ -35,7 +35,7 @@ export const getPosts = () => dispatch => {
 		dispatch({
 			type: C.GET_COMMENTS + C.START_LOAD
 		});
-		fetch('http://jsonplaceholder.typicode.com/comments/')
+		fetch('https://jsonplaceholder.typicode.com/comments/')
 		.then(response => response.json())
 		.then(comments => {
 			dispatch({
@@ -59,7 +59,7 @@ export const getPosts = () => dispatch => {
 };
 
 export const getPost = (id) => dispatch => {
-	fetch(`http://jsonplaceholder.typicode.com/posts/${id}`)
+	fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
 	.then(response => response.json())
 	.then(data => {
 		dispatch({
@@ -68,7 +68,7 @@ export const getPost = (id) => dispatch => {
 		})
 	})
 	.then(() => {
-		fetch(`http://jsonplaceholder.typicode.com/comments?postid=${id}`)
+		fetch(`https://jsonplaceholder.typicode.com/comments?postid=${id}`)
 		.then(response => response.json())
 		.then(comments => {
 			dispatch({
